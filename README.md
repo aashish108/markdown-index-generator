@@ -32,8 +32,6 @@ folder/
     page2.md
 ```
 
-Also suppose page1.md contains 3 titles inside: *First*, *Second*, *Third*.
-
 To generate the table of contents and add it to *index.md*, run the following command:
 
 ```
@@ -45,9 +43,6 @@ As result, it is add the following table of content to *index.md*:
 ```
 ## Table of Contents
 
-1. [Page1](/page1)
-	1. [First](page1/#first)
-	2. [Second](page1/#second)
-    3. [Third](page1/#third)
-2. [Page2](/page2)
+* [[File1]]
+* [[File2]]
 ```
