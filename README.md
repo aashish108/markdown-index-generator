@@ -1,6 +1,6 @@
 # Markdown Table of Contents Generator
 
-A small package to generate a table of contents based on the markdown files present in a folder.
+A small package to generate a table of contents based on the markdown files present in a folder. Made some changes so it works with Obsidian Notes.
 
 ## Installation
 
