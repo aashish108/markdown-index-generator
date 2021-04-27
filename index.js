@@ -1,3 +1,7 @@
+// To Use, software-licences is the subfolder of Markdown files 
+// and index.md is the name of the index file containing all the Markdown files in the same folder
+// `node index.js software-licences index.md`
+
 #!/usr/bin/env node
 const fs = require('fs');
 
@@ -18,68 +22,19 @@ saveTableOfContentsStringToFile(tableOfContentsString);
 
 function createTableOfContentsString(){
     var tableOfContentsString = "## Table of Contents\n\n";
-    var numeration = 1;
 
     filesList.forEach(file => {
         if(file == "index.md") return;
 
-        subString = createSubTitles(docsFolder + file);
-
         file = file.replace(".md", "");
 
-        tableOfContentsString += numeration + ". ["
-        + capitalizeFirstLetter(file.replace("_", " ")) +
-        "](/" + file + ")" + "\n" +
-        subString;
+        tableOfContentsString += `* [[${file}]]\n`
 
-        numeration++;
     });
 
     return tableOfContentsString;
 }
 
-function createSubTitles(file, callback){
-    var subTitlesToC = "";
-    var childsCounter = 0;
-
-    fileContent = fs.readFileSync(file, "utf8");
-
-    file = file.replace(".md", "");
-    file = file.replace(docsFolder, "");
-
-    var numCard = "#";
-    var tabs = "";
-
-    while(childsCounter < 1) {
-        var regExp = new RegExp("[^#]" + numCard + " .*", "g");
-        var titles = fileContent.match(regExp);
-
-        if(titles == null){
-            numCard += "#";
-            continue;
-        }
-
-        if(titles != null) {
-            childsCounter++;
-            tabs += "\t";
-        }
-
-        var counter = 1;
-
-        titles.forEach(title => {
-            title = title.replace("\n", "");
-            title = title.replace(numCard + " ", "");
-            title = title.replace(numCard, "");
-            title = "[" + title + "](" + file + "/#" + title.replace(new RegExp(" ", "g"), "_").toLowerCase() + ")";
-            subTitlesToC += tabs + counter + ". " + title + "\n";
-            counter++;
-        });
-
-        numCard += "#"
-    }
-
-    return subTitlesToC;
-}
 
 function saveTableOfContentsStringToFile(ToCString){
     fs.readFile(indexFile, 'utf8', (err, fileContent) => {
